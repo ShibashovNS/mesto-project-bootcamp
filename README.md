@@ -18,6 +18,6 @@
 
 ## Инструкция по использованию проекта
 
-- Перейти на сайт Git по ссылке https://github.com/ShibashovNS/russian-travel-bootcamp.git.
+- Перейти на сайт Git по ссылке https://github.com/ShibashovNS/mesto-project-bootcamp.git.
 - Скачать ZIP архив либо через git bush клонировать к себе репозиторий.
-- Сылка на сайт https://shibashovns.github.io/russian-travel-bootcamp/
+- Сылка на сайт https://shibashovns.github.io/mesto-project-bootcamp.git/
