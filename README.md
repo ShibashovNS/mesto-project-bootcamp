@@ -20,4 +20,4 @@
 
 - Перейти на сайт Git по ссылке https://github.com/ShibashovNS/mesto-project-bootcamp.git.
 - Скачать ZIP архив либо через git bush клонировать к себе репозиторий.
-- Сылка на сайт https://shibashovns.github.io/mesto-project-bootcamp.git/
+- Сылка на сайт https://shibashovns.github.io/mesto-project-bootcamp/
