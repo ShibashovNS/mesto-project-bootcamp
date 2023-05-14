@@ -1,0 +1,12 @@
+.popup__label {
+  position: absolute;
+  left: 41px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  transform: translateY(-110%);
+}
+.popup__label:nth-last-of-type(1) {
+  transform: translateY(-105%);
+}

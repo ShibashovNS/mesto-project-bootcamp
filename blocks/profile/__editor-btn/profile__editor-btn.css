@@ -1,0 +1,15 @@
+.profile__editor-btn {
+  display: block;
+  align-self: center;
+  margin: 0 0 0 18px;
+  background-image: url(../../../images/EditButton.svg);
+  background-repeat: no-repeat;
+  object-fit: cover;
+  min-width: 24px;
+  min-height: 24px;
+  cursor: pointer;
+}
+
+.profile__editor-btn:hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+  <div class="page__container">
+    <header class="header">
+      <div class="header__logo"></div>
+    </header>
+    <section class="popup popup_opened">
+        <form class="popup__form">
+          <fieldset class="popup__input-container">
+            <p class="popup__text">Редактировать профиль</p>
+            <input class="popup__input-item" type="text" required>  
+            <label class="popup__label">Жак-Ив Кусто</label>
+            <input class="popup__input-item" type="text" required>  
+            <label class="popup__label">Исследователь океана</label>
+              <button type="submit" class="popup__btn">Сохранить</button>                 
+            </fieldset>
+          <button type="button" class="popup__closed"></button>
+        </form>
+    </section>
+  <main class="content">
+      <section class="profile"> 
+        <div class="profile__info">
+          <img class="profile__user-avatar" src="./images/image-min.jpg" alt="автарка">
+          <div class="profile__text">
+            <div class="profile__text-container">
+              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+              <div class="profile__editor-btn"></div>
+            </div>
+            <p class="profile__user-information">Исследователь океана</p>
+          </div>
+        </div>
+        <button class="profile__btn"></button>
+      </section>
+      <section class="photo">
+        <ul class="photo__grid-list">
+          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt="  Фотография Церкови в горах">
+            <div class="photo__text-container">
+              <p class="photo__text">Карачаевск</p>
+              <div class="photo__like-btn"></div>
+            </div>
+          </li>
+          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1404681-unsplash-min.png" alt="Фотография равнины с горой">
+            <div class="photo__text-container">
+              <p class="photo__text">Гора Эльбрус</p>
+              <div class="photo__like-btn"></div>
+            </div>
+          </li>
+          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1556355-unsplash-min.png" alt="Фотография зеленых деревьев в горах">
+            <div class="photo__text-container">
+              <p class="photo__text">Домбай</p>
+              <div class="photo__like-btn"></div>
+            </div>
+          </li>
+          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1404681-unsplash-min.png" alt="Фотография равнины с горой">
+            <div class="photo__text-container">
+              <p class="photo__text">Гора Эльбрус</p>
+              <div class="photo__like-btn"></div>
+            </div>
+          </li>
+          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1556355-unsplash-min.png" alt="Фотография зеленых деревьев в горах">
+            <div class="photo__text-container">
+              <p class="photo__text">Домбай</p>
+              <div class="photo__like-btn"></div>
+            </div>
+          </li>
+          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt=" ">
+            <div class="photo__text-container">
+              <p class="photo__text">Карачаево-Черкесия</p>
+              <div class="photo__like-btn"></div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__text">© 2023 Mesto Russia</p>
+    </footer>
+  </div>
+</body>
+</html>

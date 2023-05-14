@@ -1,0 +1,9 @@
+.profile__text-container {
+  display: flex;
+}
+
+@media screen and (max-width: 980px) {
+  .profile__text-container{
+    margin: 22.25px 0 0;
+}
+}

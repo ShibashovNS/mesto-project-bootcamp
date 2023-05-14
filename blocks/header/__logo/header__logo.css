@@ -1,0 +1,8 @@
+.header__logo {
+  display: block;
+  background-image: url(../../../../images/Vector.svg);
+  min-width: 142px;
+  max-height: 33px;
+  background-repeat: no-repeat;
+  object-fit: cover;
+}

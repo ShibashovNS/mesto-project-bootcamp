@@ -1,0 +1,16 @@
+.profile__user-information {
+  margin: 16px 0 0 0;
+  display: block;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+
+@media screen and (max-width: 980px) {
+  .profile__user-information {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+}
