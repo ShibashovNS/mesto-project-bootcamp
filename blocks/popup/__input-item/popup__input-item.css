@@ -4,8 +4,12 @@
   padding: 0;
   width: 100%;
   border: none;
-  border-bottom:1px solid #000000;
-  opacity: .2;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; 
+  font-size: 14px;
+  line-height: 17px;
 }
 
 

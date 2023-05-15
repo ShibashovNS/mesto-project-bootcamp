@@ -2,14 +2,24 @@
   display: block;
   align-self: center;
   margin: 0 0 0 18px;
-  background-image: url(../../../images/EditButton.svg);
+  background: url(../../../images/EditButton.svg);
+  background-position: center;
   background-repeat: no-repeat;
   object-fit: cover;
   min-width: 24px;
   min-height: 24px;
+  border: 1px solid #FFFFFF;;
   cursor: pointer;
 }
 
+
+@media screen and (max-width: 480px) {
+  .profile__editor-btn {
+    min-width: 18px;
+    min-height: 18px;
+  }
+}
+
 .profile__editor-btn:hover {
-  opacity: 0.6;
+  opacity: .6;
 }

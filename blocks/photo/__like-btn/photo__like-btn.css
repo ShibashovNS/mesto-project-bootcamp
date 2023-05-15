@@ -1,19 +1,21 @@
 .photo__like-btn {  
   margin: 0 15px 0 0;
   display: block;
-  background-image: url(../../../images/like.svg);
+  background: url(../../../images/like.svg);
+  background-position: center;
   background-repeat: no-repeat;
   min-width: 22px;
   min-height: 19px;
   cursor: pointer;
+  border: none;
 }
 
 
 .photo__like-btn:active {
-  background-image: url(../../../images/Union.svg);
+  background: url(../../../images/Union.svg);
 }
 
 
 .photo__like-btn:hover {
-  opacity: 0.6;
+  opacity: .5;
 }

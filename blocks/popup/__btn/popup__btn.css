@@ -6,6 +6,18 @@
   min-height: 50px;
   color: #FFFFFF;
   cursor: pointer;
+  border: none;
+  padding: 0;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+}
+
+@media screen and (max-width: 758px) {
+  .popup__btn {
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
 
 .popup__btn:hover {

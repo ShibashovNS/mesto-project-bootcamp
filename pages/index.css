@@ -1,5 +1,5 @@
 @import url(../vendor/normalize.css);
-@import url(../vendor/font/inter.css);
+@import url(../vendor/fonts/fonts.css);
 
 
 /*pages*/
@@ -22,6 +22,7 @@
 @import url(../blocks/popup/__label/popup__label.css);
 @import url(../blocks/popup/__btn/popup__btn.css);
 @import url(../blocks/popup/__closed/popup__closed.css);
+@import url(../blocks/popup/__container/popup__container.css);
 
 
 /*contant*/

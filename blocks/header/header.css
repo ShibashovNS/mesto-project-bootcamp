@@ -3,20 +3,20 @@
   margin: 45px 0 0;
   display: flex;
   width: calc(100% - (200px * 2));
-  height: 74px;
+  min-height: 74px;
   box-sizing: border-box;
 }
 
 .header::after {
-    position: absolute;
-    bottom: 0;
-    content: '';
-    display: block;
-    height: 1px;
-    background: #545454;
-    z-index: 1;
-    width: 100%;
-    opacity: .7;
+  position: absolute;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 1px;
+  background: #545454;
+  z-index: 1;
+  width: 100%;
+  opacity: .7;
 }
 
 

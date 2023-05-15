@@ -12,74 +12,74 @@
     <header class="header">
       <div class="header__logo"></div>
     </header>
-    <section class="popup popup_opened">
-        <form class="popup__form">
+    <div class="popup popup_opened">
+      <div class="popup__container">
+        <form class="popup__form" name="popup">
           <fieldset class="popup__input-container">
-            <p class="popup__text">Редактировать профиль</p>
-            <input class="popup__input-item" type="text" required>  
-            <label class="popup__label">Жак-Ив Кусто</label>
-            <input class="popup__input-item" type="text" required>  
-            <label class="popup__label">Исследователь океана</label>
+            <h2 class="popup__text">Редактировать профиль</h2>
+            <input class="popup__input-item" name="user-name" type="text" value="Жак-Ив Кусто" placeholder="Иван Иванович" required>  
+            <input class="popup__input-item" name="user-profession" type="text" value="Исследователь океана" placeholder="Каскадер" required>
               <button type="submit" class="popup__btn">Сохранить</button>                 
             </fieldset>
           <button type="button" class="popup__closed"></button>
         </form>
-    </section>
+      </div>
+    </div>
   <main class="content">
-      <section class="profile"> 
-        <div class="profile__info">
-          <img class="profile__user-avatar" src="./images/image-min.jpg" alt="автарка">
-          <div class="profile__text">
-            <div class="profile__text-container">
-              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-              <div class="profile__editor-btn"></div>
-            </div>
-            <p class="profile__user-information">Исследователь океана</p>
+    <section class="profile"> 
+      <div class="profile__info">
+        <img class="profile__user-avatar" src="./images/image-min.jpg" alt="автарка">
+        <div class="profile__text">
+          <div class="profile__text-container">
+            <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__editor-btn"></button>
           </div>
+            <p class="profile__user-information">Исследователь океана</p>
         </div>
-        <button class="profile__btn"></button>
-      </section>
-      <section class="photo">
-        <ul class="photo__grid-list">
-          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt="  Фотография Церкови в горах">
-            <div class="photo__text-container">
-              <p class="photo__text">Карачаевск</p>
-              <div class="photo__like-btn"></div>
-            </div>
-          </li>
-          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1404681-unsplash-min.png" alt="Фотография равнины с горой">
-            <div class="photo__text-container">
-              <p class="photo__text">Гора Эльбрус</p>
-              <div class="photo__like-btn"></div>
-            </div>
-          </li>
-          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1556355-unsplash-min.png" alt="Фотография зеленых деревьев в горах">
-            <div class="photo__text-container">
-              <p class="photo__text">Домбай</p>
-              <div class="photo__like-btn"></div>
-            </div>
-          </li>
-          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1404681-unsplash-min.png" alt="Фотография равнины с горой">
-            <div class="photo__text-container">
-              <p class="photo__text">Гора Эльбрус</p>
-              <div class="photo__like-btn"></div>
-            </div>
-          </li>
-          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1556355-unsplash-min.png" alt="Фотография зеленых деревьев в горах">
-            <div class="photo__text-container">
-              <p class="photo__text">Домбай</p>
-              <div class="photo__like-btn"></div>
-            </div>
-          </li>
-          <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt=" ">
-            <div class="photo__text-container">
-              <p class="photo__text">Карачаево-Черкесия</p>
-              <div class="photo__like-btn"></div>
-            </div>
-          </li>
-        </ul>
-      </section>
-    </main>
+      </div>
+      <button type="button" class="profile__btn"></button>
+    </section>
+    <section class="photo">
+      <ul class="photo__grid-list">
+        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt="  Фотография Церкови в горах">
+          <div class="photo__text-container">
+            <h2 class="photo__text">Карачаевск</h2>
+            <button type="button" class="photo__like-btn"></button>
+          </div>
+        </li>
+        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1404681-unsplash-min.png" alt="Фотография равнины с горой">
+          <div class="photo__text-container">
+            <h2 class="photo__text">Гора Эльбрус</h2>
+            <button type="button" class="photo__like-btn"></button>
+          </div>
+        </li>
+        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1556355-unsplash-min.png" alt="Фотография зеленых деревьев в горах">
+          <div class="photo__text-container">
+            <h2 class="photo__text">Домбай</h2>
+            <button type="button" class="photo__like-btn"></button>
+          </div>
+        </li>
+        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1404681-unsplash-min.png" alt="Фотография равнины с горой">
+          <div class="photo__text-container">
+            <h2 class="photo__text">Гора Эльбрус</h2>
+            <button type="button" class="photo__like-btn"></button>
+          </div>
+        </li>
+        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1556355-unsplash-min.png" alt="Фотография зеленых деревьев в горах">
+          <div class="photo__text-container">
+            <h2 class="photo__text">Домбай</h2>
+            <button type="button" class="photo__like-btn"></button>
+          </div>
+        </li>
+        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt=" ">
+          <div class="photo__text-container">
+            <h2 class="photo__text">Карачаево-Черкесия</h2>
+            <button type="button" class="photo__like-btn"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
     <footer class="footer">
       <p class="footer__text">© 2023 Mesto Russia</p>
     </footer>
