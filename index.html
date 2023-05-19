@@ -12,19 +12,6 @@
     <header class="header">
       <div class="header__logo"></div>
     </header>
-    <div class="popup popup_opened">
-      <div class="popup__container">
-        <form class="popup__form" name="popup">
-          <fieldset class="popup__input-container">
-            <h2 class="popup__text">Редактировать профиль</h2>
-            <input class="popup__input-item" name="user-name" type="text" value="Жак-Ив Кусто" placeholder="Иван Иванович" required>  
-            <input class="popup__input-item" name="user-profession" type="text" value="Исследователь океана" placeholder="Каскадер" required>
-              <button type="submit" class="popup__btn">Сохранить</button>                 
-            </fieldset>
-          <button type="button" class="popup__closed"></button>
-        </form>
-      </div>
-    </div>
   <main class="content">
     <section class="profile"> 
       <div class="profile__info">
@@ -83,6 +70,22 @@
     <footer class="footer">
       <p class="footer__text">© 2023 Mesto Russia</p>
     </footer>
+
+    <div class="popup popup_profile popup_opened">
+      <div class="popup__container">
+        <form class="popup__form" name="popup">
+          <fieldset class="popup__input-container">
+            <h2 class="popup__text">Редактировать профиль</h2>
+            <input class="popup__input-item popup__input-item-name" name="user-name" type="text" placeholder="Имя" required>  
+            <input class="popup__input-item popup__input-item-profession" name="user-profession" type="text" placeholder="Профессия" required>
+              <button type="submit" class="popup__btn">Сохранить</button>                 
+            </fieldset>
+          <button type="button" class="popup__closed"></button>
+        </form>
+      </div>
+    </div>
+    
   </div>
+  <script src="index.js"></script>
 </body>
 </html>
