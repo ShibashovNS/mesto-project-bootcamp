@@ -18,74 +18,65 @@
         <img class="profile__user-avatar" src="./images/image-min.jpg" alt="автарка">
         <div class="profile__text">
           <div class="profile__text-container">
-            <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+            <h1 class="profile__user-name" contenteditable>Жак-Ив Кусто</h1>
             <button type="button" class="profile__editor-btn"></button>
           </div>
-            <p class="profile__user-information">Исследователь океана</p>
+            <p class="profile__user-information" contenteditable>Исследователь океана</p>
         </div>
       </div>
       <button type="button" class="profile__btn"></button>
     </section>
     <section class="photo">
       <ul class="photo__grid-list">
-        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt="  Фотография Церкови в горах">
-          <div class="photo__text-container">
-            <h2 class="photo__text">Карачаевск</h2>
-            <button type="button" class="photo__like-btn"></button>
-          </div>
-        </li>
-        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1404681-unsplash-min.png" alt="Фотография равнины с горой">
-          <div class="photo__text-container">
-            <h2 class="photo__text">Гора Эльбрус</h2>
-            <button type="button" class="photo__like-btn"></button>
-          </div>
-        </li>
-        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1556355-unsplash-min.png" alt="Фотография зеленых деревьев в горах">
-          <div class="photo__text-container">
-            <h2 class="photo__text">Домбай</h2>
-            <button type="button" class="photo__like-btn"></button>
-          </div>
-        </li>
-        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1404681-unsplash-min.png" alt="Фотография равнины с горой">
-          <div class="photo__text-container">
-            <h2 class="photo__text">Гора Эльбрус</h2>
-            <button type="button" class="photo__like-btn"></button>
-          </div>
-        </li>
-        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1556355-unsplash-min.png" alt="Фотография зеленых деревьев в горах">
-          <div class="photo__text-container">
-            <h2 class="photo__text">Домбай</h2>
-            <button type="button" class="photo__like-btn"></button>
-          </div>
-        </li>
-        <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt=" ">
-          <div class="photo__text-container">
-            <h2 class="photo__text">Карачаево-Черкесия</h2>
-            <button type="button" class="photo__like-btn"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
     <footer class="footer">
       <p class="footer__text">© 2023 Mesto Russia</p>
     </footer>
-
     <div class="popup popup_profile popup_opened">
       <div class="popup__container">
         <form class="popup__form" name="popup">
           <fieldset class="popup__input-container">
             <h2 class="popup__text">Редактировать профиль</h2>
-            <input class="popup__input-item popup__input-item-name" name="user-name" type="text" placeholder="Имя" required>  
-            <input class="popup__input-item popup__input-item-profession" name="user-profession" type="text" placeholder="Профессия" required>
+            <input class="popup__input-item popup__input-item-name" value=" " name="user-name" type="text" placeholder="Имя" required>  
+            <input class="popup__input-item popup__input-item-profession" value=" " name="user-profession" type="text" placeholder="Профессия" required>
               <button type="submit" class="popup__btn">Сохранить</button>                 
             </fieldset>
           <button type="button" class="popup__closed"></button>
         </form>
       </div>
     </div>
-    
+    <div class="popup popup_newCard popup_opened">
+      <div class="popup__container">
+        <form class="popup__form" name="popup">
+          <fieldset class="popup__input-container">
+            <h2 class="popup__text">Новое место</h2>
+            <input class="popup__input-item popup__input-item-name" name="user-name" type="text" placeholder="Названия" required>  
+            <input class="popup__input-item popup__input-item-profession" name="user-profession" type="text" placeholder="Ссылка на картинку" required>
+              <button type="submit" class="popup__btn">Сохранить</button>                 
+            </fieldset>
+          <button type="button" class="popup__closed"></button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_addImage popup_opened">
+      <div class="popup__container popup__container_image">
+          <img class="popup__photo" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg">
+          <p class="popup__caption"></p>
+          <button type="button" class="popup__closed"></button>
+      </div>
+    </div>
   </div>
+  <template id = "photoCardsTeamplate">
+    <li class="photo__card"><img class="photo__image" src="./images/kirill-pershin-1088404-unsplash-min.png" alt="  Фотография Церкви в горах">
+      <button class="photo__delite"></button>
+      <div class="photo__text-container">
+        <h2 class="photo__text">Карачаевск</h2>
+        <button type="button" class="photo__like-btn" ></button>
+      </div>
+    </li>
+  </template>
   <script src="index.js"></script>
 </body>
 </html>

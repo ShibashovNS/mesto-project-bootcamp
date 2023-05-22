@@ -1,0 +1,13 @@
+.photo__delite {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 18px;
+  height: 19px;
+  border: none;
+  background: url(../../../images/delite_icon.svg);
+}
+
+.photo__delite:hover {
+  opacity: .6;
+}

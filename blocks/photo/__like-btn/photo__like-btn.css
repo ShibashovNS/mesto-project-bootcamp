@@ -11,7 +11,7 @@
 }
 
 
-.photo__like-btn:active {
+.photo__like-btn_active {
   background: url(../../../images/Union.svg);
 }
 
