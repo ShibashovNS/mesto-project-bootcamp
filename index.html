@@ -36,26 +36,26 @@
     </footer>
     <div class="popup popup_profile">
       <div class="popup__container">
+        <h2 class="popup__text">Редактировать профиль</h2>
         <form class="popup__form" name="popup">
-          <fieldset class="popup__input-container">
-            <h2 class="popup__text">Редактировать профиль</h2>
-            <input class="popup__input-item popup__input-item-name" value=" " name="user-name" type="text" placeholder="Имя" required>  
-            <input class="popup__input-item popup__input-item-profession" value=" " name="user-profession" type="text" placeholder="Профессия" required>
+          <div class="popup__input-container">
+            <input class="popup__input-item popup__input-item-name" name="user-name" type="text" placeholder="Имя" required>  
+            <input class="popup__input-item popup__input-item-profession" name="user-profession" type="text" placeholder="Профессия" required>
               <button type="submit" class="popup__btn">Сохранить</button>                 
-            </fieldset>
+          </div>
           <button type="button" class="popup__closed"></button>
         </form>
       </div>
     </div>
     <div class="popup popup_newCard">
       <div class="popup__container">
+        <h2 class="popup__text">Новое место</h2>
         <form class="popup__form" name="popup">
-          <fieldset class="popup__input-container">
-            <h2 class="popup__text">Новое место</h2>
+          <div class="popup__input-container">
             <input class="popup__input-item popup__input-item-name" name="user-name" type="text" placeholder="Названия" required>  
             <input class="popup__input-item popup__input-item-profession" name="user-profession" type="text" placeholder="Ссылка на картинку" required>
               <button type="submit" class="popup__btn">Сохранить</button>                 
-            </fieldset>
+          </div>
           <button type="button" class="popup__closed"></button>
         </form>
       </div>

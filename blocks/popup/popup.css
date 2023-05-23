@@ -1,20 +1,14 @@
 .popup {
-  width: 100%;
-  height: 100%;
-  position: fixed;
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
-  display: none;
-}
-
-
-.popup::after {
-  position: absolute;
-  content: " ";
-  width: 100%;
   height: 100%;
-  background: #000000;
-  opacity: .5;
-  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background-color: rgba(0,0,0,.5);
+  visibility: hidden;
+  width: 100%;
+  transition: visibility .3s,opacity .3s linear;
 }

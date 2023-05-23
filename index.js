@@ -3,6 +3,7 @@ const buttonEditProfile = document.querySelector(".profile__editor-btn");
 const windowPopupProfile = document.querySelector(".popup_profile");
 const windowPopupNewCard = document.querySelector(".popup_newCard");
 const windowPopupAddImage = document.querySelector(".popup_addImage");
+const popupForm = windowPopupNewCard.querySelector(".popup__form");
 
 /*кнопки закрытия модальных окон*/
 const buttonPopupProfileClose =
@@ -133,8 +134,7 @@ function handlePhotoCard(event) {
   event.preventDefault();
   const newCard = createCard(inputSrcNewCard.value, inputTextNewCard.value);
   photoGridList.prepend(newCard);
-  inputTextNewCard.value = "";
-  inputSrcNewCard.value = "";
+  popupForm.reset();
   handleButtonClose(windowPopupNewCard);
 }
 
