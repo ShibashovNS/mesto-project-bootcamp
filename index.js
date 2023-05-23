@@ -1,12 +1,12 @@
 /*popup элемент*/
 const buttonEditProfile = document.querySelector(".profile__editor-btn");
-const windowPopupElement = document.querySelector(".popup_profile");
+const windowPopupProfile = document.querySelector(".popup_profile");
 const windowPopupNewCard = document.querySelector(".popup_newCard");
 const windowPopupAddImage = document.querySelector(".popup_addImage");
 
 /*кнопки закрытия модальных окон*/
 const buttonPopupProfileClose =
-  windowPopupElement.querySelector(".popup__closed");
+  windowPopupProfile.querySelector(".popup__closed");
 const buttonPopupNewCard = windowPopupNewCard.querySelector(".popup__closed");
 const buttonPopupAddImage = windowPopupAddImage.querySelector(".popup__closed");
 
@@ -35,8 +35,8 @@ const inputSrcNewCard = windowPopupNewCard.querySelector(
 const photoGridList = document.querySelector(".photo__grid-list");
 const buttonNewCard = document.querySelector(".profile__btn");
 const containerPopupImage = document.querySelector(".popup__container_image");
-const ImagePopup = document.querySelector(".popup__photo");
-const ImageCaption = document.querySelector(".popup__caption");
+const imagePopup = document.querySelector(".popup__photo");
+const imageCaption = document.querySelector(".popup__caption");
 
 const initialCards = [
   {
@@ -66,7 +66,7 @@ const initialCards = [
 ];
 
 /*функция закрытия */
-function popupButtonClose(event) {
+function handleButtonClose(event) {
   event.classList.remove("popup_opened");
 }
 
@@ -81,17 +81,17 @@ function handleButtonEdit(popup) {
   inputItemProfession.value = profileUserInformation.textContent;
 }
 
-function handleFormSubmit(event) {
+function handleFormProfile(event) {
   event.preventDefault();
   profileUserName.textContent = inputItemName.value;
   profileUserInformation.textContent = inputItemProfession.value;
-  popupButtonClose(windowPopupElement);
+  handleButtonClose(windowPopupProfile);
 }
 
 /*кнопка открытия попап image*/
 function handlerOpenPhoto(teamplateElement, popup) {
-  ImagePopup.src = teamplateElement.querySelector(".photo__image").src;
-  ImageCaption.textContent =
+  imagePopup.src = teamplateElement.querySelector(".photo__image").src;
+  imageCaption.textContent =
     teamplateElement.querySelector(".photo__text").textContent;
   popupButtonOpen(popup);
 }
@@ -107,7 +107,7 @@ function handleDeliteCard(deliteelement) {
 }
 
 /*копирование карточки*/
-function addPhotoCard(src, text) {
+function createCard(src, text) {
   const templateClone = template.cloneNode(true);
   const templatePhotoImage = templateClone.querySelector(".photo__image");
   const templateText = templateClone.querySelector(".photo__text");
@@ -116,6 +116,7 @@ function addPhotoCard(src, text) {
 
   templatePhotoImage.src = src;
   templateText.textContent = text;
+  templatePhotoImage.alt = text;
 
   templatePhotoImage.addEventListener("click", () =>
     handlerOpenPhoto(templateClone, windowPopupAddImage)
@@ -130,22 +131,22 @@ function addPhotoCard(src, text) {
 /*Добавление новой карточки*/
 function handlePhotoCard(event) {
   event.preventDefault();
-  const newCard = addPhotoCard(inputSrcNewCard.value, inputTextNewCard.value);
+  const newCard = createCard(inputSrcNewCard.value, inputTextNewCard.value);
   photoGridList.prepend(newCard);
   inputTextNewCard.value = "";
   inputSrcNewCard.value = "";
-  popupButtonClose(windowPopupNewCard);
+  handleButtonClose(windowPopupNewCard);
 }
 
 /*cоздание карточек из заданного массива*/
 initialCards.forEach(function (item) {
-  const newCardElement = addPhotoCard(item.link, item.name);
+  const newCardElement = createCard(item.link, item.name);
   photoGridList.prepend(newCardElement);
 });
 
 /*слушатили открытия popup*/
 buttonEditProfile.addEventListener("click", () =>
-  handleButtonEdit(windowPopupElement)
+  handleButtonEdit(windowPopupProfile)
 );
 buttonNewCard.addEventListener("click", () =>
   popupButtonOpen(windowPopupNewCard)
@@ -153,17 +154,17 @@ buttonNewCard.addEventListener("click", () =>
 
 /*сабмит формы редактирования профиля и добавления карточек*/
 windowPopupNewCard.addEventListener("submit", handlePhotoCard);
-windowPopupElement.addEventListener("submit", handleFormSubmit);
+windowPopupProfile.addEventListener("submit", handleFormProfile);
 
 /*закртытие карточек*/
 buttonPopupProfileClose.addEventListener("click", () =>
-  popupButtonClose(windowPopupElement)
+  handleButtonClose(windowPopupProfile)
 );
 
 buttonPopupNewCard.addEventListener("click", () =>
-  popupButtonClose(windowPopupNewCard)
+  handleButtonClose(windowPopupNewCard)
 );
 
 buttonPopupAddImage.addEventListener("click", () =>
-  popupButtonClose(windowPopupAddImage)
+  handleButtonClose(windowPopupAddImage)
 );
