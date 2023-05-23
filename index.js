@@ -107,7 +107,7 @@ function handleDeliteCard(deliteelement) {
 }
 
 /*копирование карточки*/
-function createCard(src, text) {
+function cregit(src, text) {
   const templateClone = template.cloneNode(true);
   const templatePhotoImage = templateClone.querySelector(".photo__image");
   const templateText = templateClone.querySelector(".photo__text");
