@@ -2,7 +2,13 @@
 const buttonEditProfile = document.querySelector(".profile__editor-btn");
 const windowPopupElement = document.querySelector(".popup_profile");
 const windowPopupNewCard = document.querySelector(".popup_newCard");
-const buttonPopupClose = document.querySelectorAll(".popup__closed");
+const windowPopupAddImage = document.querySelector(".popup_addImage");
+
+/*кнопки закрытия модальных окон*/
+const buttonPopupProfileClose =
+  windowPopupElement.querySelector(".popup__closed");
+const buttonPopupNewCard = windowPopupNewCard.querySelector(".popup__closed");
+const buttonPopupAddImage = windowPopupAddImage.querySelector(".popup__closed");
 
 /*перенос значений в инпут*/
 const popupContainer = document.querySelector(".popup__container");
@@ -61,33 +67,33 @@ const initialCards = [
 
 /*функция закрытия */
 function popupButtonClose(event) {
-  event.target.closest(".popup").classList.toggle("popup_opened");
+  event.classList.remove("popup_opened");
+}
+
+function popupButtonOpen(popup) {
+  popup.classList.add("popup_opened");
 }
 
 /*функция открытия редактирования профиля*/
-function handleButtonEdit() {
-  windowPopupElement.classList.toggle("popup_opened");
+function handleButtonEdit(popup) {
+  popupButtonOpen(popup);
   inputItemName.value = profileUserName.textContent;
   inputItemProfession.value = profileUserInformation.textContent;
-}
-
-function handleButtonNewCard() {
-  windowPopupNewCard.classList.toggle("popup_opened");
 }
 
 function handleFormSubmit(event) {
   event.preventDefault();
   profileUserName.textContent = inputItemName.value;
   profileUserInformation.textContent = inputItemProfession.value;
-  popupButtonClose(event);
+  popupButtonClose(windowPopupElement);
 }
 
 /*кнопка открытия попап image*/
-function handlerOpenPhoto(teamplateElement) {
+function handlerOpenPhoto(teamplateElement, popup) {
   ImagePopup.src = teamplateElement.querySelector(".photo__image").src;
   ImageCaption.textContent =
     teamplateElement.querySelector(".photo__text").textContent;
-  containerPopupImage.closest(".popup").classList.toggle("popup_opened");
+  popupButtonOpen(popup);
 }
 
 /*активация лайков*/
@@ -112,7 +118,7 @@ function addPhotoCard(src, text) {
   templateText.textContent = text;
 
   templatePhotoImage.addEventListener("click", () =>
-    handlerOpenPhoto(templateClone)
+    handlerOpenPhoto(templateClone, windowPopupAddImage)
   );
   buttonDeliteCard.addEventListener("click", () =>
     handleDeliteCard(templateClone)
@@ -128,7 +134,7 @@ function handlePhotoCard(event) {
   photoGridList.prepend(newCard);
   inputTextNewCard.value = "";
   inputSrcNewCard.value = "";
-  popupButtonClose(event);
+  popupButtonClose(windowPopupNewCard);
 }
 
 /*cоздание карточек из заданного массива*/
@@ -137,12 +143,27 @@ initialCards.forEach(function (item) {
   photoGridList.prepend(newCardElement);
 });
 
-/*открыть и закрыть popup*/
-buttonPopupClose.forEach(function (button) {
-  button.addEventListener("click", popupButtonClose);
-});
+/*слушатили открытия popup*/
+buttonEditProfile.addEventListener("click", () =>
+  handleButtonEdit(windowPopupElement)
+);
+buttonNewCard.addEventListener("click", () =>
+  popupButtonOpen(windowPopupNewCard)
+);
 
-buttonEditProfile.addEventListener("click", handleButtonEdit);
-buttonNewCard.addEventListener("click", handleButtonNewCard);
+/*сабмит формы редактирования профиля и добавления карточек*/
 windowPopupNewCard.addEventListener("submit", handlePhotoCard);
 windowPopupElement.addEventListener("submit", handleFormSubmit);
+
+/*закртытие карточек*/
+buttonPopupProfileClose.addEventListener("click", () =>
+  popupButtonClose(windowPopupElement)
+);
+
+buttonPopupNewCard.addEventListener("click", () =>
+  popupButtonClose(windowPopupNewCard)
+);
+
+buttonPopupAddImage.addEventListener("click", () =>
+  popupButtonClose(windowPopupAddImage)
+);
