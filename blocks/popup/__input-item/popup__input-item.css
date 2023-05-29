@@ -1,6 +1,5 @@
 .popup__input-item {
   display: inline-block;
-  margin: 54px 0 0 0;
   padding: 0;
   width: 100%;
   border: none;
@@ -12,7 +11,3 @@
   line-height: 17px;
 }
 
-
-.popup__input-item:nth-last-of-type(1) {
-  margin: 30px 0 0;
-}
