@@ -1,7 +1,6 @@
 const path = require("path"); // подключаем path к конфигу вебпак, утилита, которая превращает относительный путь в абсолютный
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // подключите плагин
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
 // подключите к проекту mini-css-extract-plugin
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -48,7 +47,11 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
+            // добавьте объект options
+            options: { importLoaders: 1 }, //Если вы используете директиву @import в css-файлах, после подключения postcss-loader, нужно изменить то, как подключается css-loader
           },
+          // Добавьте postcss-loader
+          "postcss-loader",
         ],
       },
     ],

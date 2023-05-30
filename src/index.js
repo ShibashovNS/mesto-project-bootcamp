@@ -1,5 +1,5 @@
 // index.js
-import './pages/index.css'; // добавьте импорт главного файла стилей
+import "./pages/index.css"; // добавьте импорт главного файла стилей
 
 /*элемент*/
 const buttonEditProfile = document.querySelector(".profile__editor-btn");
@@ -74,14 +74,16 @@ const initialCards = [
   },
 ];
 
-/*функция закрытия */
-function handleButtonClose(popup) {
-  popup.classList.remove("popup_opened");
-}
+/*импорты из модулей*/
+import createCard from "../src/components/card.js";
+import {
+  handleButtonClose,
+  popupButtonOpen,
+  hadleOverlayClose,
+  handleEscPopupClose,
+} from "../src/components/modal.js";
+import { validityOptions, showError, hideError, handleFormValidation, buttonStatus, enableButton, disableButton, setEventListeners, enableValidation } from "../src/components/validation.js";
 
-function popupButtonOpen(popup) {
-  popup.classList.add("popup_opened");
-}
 
 /*функция открытия редактирования профиля*/
 function handleButtonEdit(popup) {
@@ -97,69 +99,6 @@ function handleFormProfile(event) {
   profileUserInformation.textContent = inputItemProfession.value;
   handleButtonClose(windowPopupProfile);
 }
-
-/*функция показывает ошибку*/
-function showError(input, errorText) {
-  const errorId = `error-${input.id}`;
-  const errorMessange = document.getElementById(errorId);
-  errorMessange.textContent = errorText;
-  input.classList.add("popup__input-item-invalid");
-}
-
-/*функция прячет ошибку*/
-function hideError(input) {
-  const errorId = `error-${input.id}`;
-  const errorMessange = document.getElementById(errorId);
-  errorMessange.textContent = "";
-  input.classList.remove("popup__input-item-invalid");
-}
-
-/*функция валидации регистрации*/
-userNameInput = windowProfileForm.username;
-
-function handleFormValidation(input) {
-  if (input.validity.valid) {
-    hideError(input);
-  } else {
-    showError(input, input.validationMessage);
-  }
-}
-
-/*функция включает и отключает кнопку сабмит события на основание валидности полей*/
-function buttonStatus(form, submitButton) {
-  if (form.checkValidity()) {
-    // метод проверки валидности всей формы
-    enableButton(submitButton);
-  } else {
-    disableButton(submitButton);
-  }
-}
-
-function enableButton(submitButton) {
-  submitButton.disabled = false;
-}
-
-function disableButton(submitButton) {
-  submitButton.disabled = true;
-}
-
-function setEventListeners(form) {
-  const buttonSubmit = form.querySelector(".popup__btn");
-  const inputList = form.querySelectorAll(".popup__input-item");
-  buttonStatus(form, buttonSubmit);
-  inputList.forEach((input) => {
-    input.addEventListener("input", () => {
-      handleFormValidation(input);
-      buttonStatus(form, buttonSubmit);
-    });
-  });
-}
-
-/*функция перебора и подстановки форм в функци*/
-const formList = document.querySelectorAll(".popup__form");
-formList.forEach((form) => {
-  setEventListeners(form);
-});
 
 /*кнопка открытия попап image*/
 function handlerOpenPhoto(teamplateElement, popup) {
@@ -179,35 +118,13 @@ function handleDeliteCard(deliteelement) {
   deliteelement.remove();
 }
 
-/*копирование карточки*/
-function createCard(src, text) {
-  const templateClone = template.cloneNode(true);
-  const templatePhotoImage = templateClone.querySelector(".photo__image");
-  const templateText = templateClone.querySelector(".photo__text");
-  const buttonDeliteCard = templateClone.querySelector(".photo__delite");
-  const buttonLike = templateClone.querySelector(".photo__like-btn");
-
-  templatePhotoImage.src = src;
-  templateText.textContent = text;
-  templatePhotoImage.alt = text;
-
-  templatePhotoImage.addEventListener("click", () =>
-    handlerOpenPhoto(templateClone, windowPopupAddImage)
-  );
-  buttonDeliteCard.addEventListener("click", () =>
-    handleDeliteCard(templateClone)
-  );
-  buttonLike.addEventListener("click", handleLikeButton);
-  return templateClone;
-}
-
 /*Добавление новой карточки*/
 function handlePhotoCard(event) {
   event.preventDefault();
   const newCard = createCard(inputSrcNewCard.value, inputTextNewCard.value);
   photoGridList.prepend(newCard);
   popupForm.reset();
-  handleButtonClose();
+  handleButtonClose(windowPopupNewCard);
 }
 
 /*cоздание карточек из заданного массива*/
@@ -216,28 +133,6 @@ initialCards.forEach(function (item) {
   photoGridList.prepend(newCardElement);
 });
 
-/*функция закрытия попапа при нажатии на overlay*/
-function hadleOverlayClose(event) {
-  if (event.target === event.currentTarget) {
-    handleButtonClose(event.target);
-  }
-}
-
-/*слушатель закрытия popup при нажатии на overlay*/
-overlayPopup.forEach(function (overlay) {
-  overlay.addEventListener("click", (event) => {
-    hadleOverlayClose(event);
-  });
-});
-
-/*закрытие попап по нажатию на Esc*/
-function handleEscPopupClose(event) {
-  if (event.key === "Escape") {
-    const popup = document.querySelector(".popup_opened");
-    popup.classList.remove("popup_opened");
-  }
-}
-
 /*слушатили открытия popup*/
 buttonEditProfile.addEventListener("click", () =>
   handleButtonEdit(windowPopupProfile)
@@ -245,6 +140,13 @@ buttonEditProfile.addEventListener("click", () =>
 buttonNewCard.addEventListener("click", () =>
   popupButtonOpen(windowPopupNewCard)
 );
+
+/*слушатель закрытия popup при нажатии на overlay*/
+overlayPopup.forEach(function (overlay) {
+  overlay.addEventListener("mousedown", (event) => {
+    hadleOverlayClose(event);
+  });
+});
 
 /*сабмит формы редактирования профиля и добавления карточек*/
 windowPopupNewCard.addEventListener("submit", handlePhotoCard);
@@ -262,3 +164,8 @@ buttonPopupNewCard.addEventListener("click", () =>
 buttonPopupAddImage.addEventListener("click", () =>
   handleButtonClose(windowPopupAddImage)
 );
+
+/*слушатель закрытия попап по нажатию на esc*/
+document.addEventListener("keydown", handleEscPopupClose);
+
+
