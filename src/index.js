@@ -8,7 +8,7 @@ const windowProfileForm = document.forms.register;
 const windowNewCardForm = document.forms.newCard;
 
 const windowPopupNewCard = document.querySelector(".popup_newCard");
-const windowPopupAddImage = document.querySelector(".popup_addImage");
+/*const windowPopupAddImage = document.querySelector(".popup_addImage"); */
 const popupForm = windowPopupNewCard.querySelector(".popup__form");
 
 /*кнопки закрытия модальных окон*/
@@ -31,9 +31,6 @@ const profileUserInformation = document.querySelector(
   ".profile__user-information"
 );
 
-const template = document
-  .getElementById("photoCardsTeamplate")
-  .content.querySelector(".photo__card");
 const inputTextNewCard = windowPopupNewCard.querySelector(
   ".popup__input-item-name"
 );
@@ -44,8 +41,6 @@ const photoGridList = document.querySelector(".photo__grid-list");
 const buttonNewCard = document.querySelector(".profile__btn");
 const buttonProfileSubmit = document.querySelector(".popup__btn");
 const containerPopupImage = document.querySelector(".popup__container_image");
-const imagePopup = document.querySelector(".popup__photo");
-const imageCaption = document.querySelector(".popup__caption");
 
 const initialCards = [
   {
@@ -75,19 +70,37 @@ const initialCards = [
 ];
 
 /*импорты из модулей*/
-import createCard from "../src/components/card.js";
+import {
+  template,
+  windowPopupAddImage,
+  imagePopup,
+  imageCaption,
+  createCard,
+  handlerOpenPhoto,
+  handleButtonOpen,
+  handleLikeButton,
+  handleDeliteCard,
+} from "../src/components/card.js";
 import {
   handleButtonClose,
-  popupButtonOpen,
   hadleOverlayClose,
   handleEscPopupClose,
 } from "../src/components/modal.js";
-import { validityOptions, showError, hideError, handleFormValidation, buttonStatus, enableButton, disableButton, setEventListeners, enableValidation } from "../src/components/validation.js";
-
+import {
+  validityOptions,
+  showError,
+  hideError,
+  handleFormValidation,
+  buttonStatus,
+  enableButton,
+  disableButton,
+  setEventListeners,
+  enableValidation,
+} from "../src/components/validation.js";
 
 /*функция открытия редактирования профиля*/
 function handleButtonEdit(popup) {
-  popupButtonOpen(popup);
+  handleButtonOpen(popup);
   inputItemName.value = profileUserName.textContent;
   inputItemProfession.value = profileUserInformation.textContent;
 }
@@ -98,24 +111,6 @@ function handleFormProfile(event) {
   profileUserName.textContent = inputItemName.value;
   profileUserInformation.textContent = inputItemProfession.value;
   handleButtonClose(windowPopupProfile);
-}
-
-/*кнопка открытия попап image*/
-function handlerOpenPhoto(teamplateElement, popup) {
-  imagePopup.src = teamplateElement.querySelector(".photo__image").src;
-  imageCaption.textContent =
-    teamplateElement.querySelector(".photo__text").textContent;
-  popupButtonOpen(popup);
-}
-
-/*активация лайков*/
-function handleLikeButton(event) {
-  event.target.classList.toggle("photo__like-btn_active");
-}
-
-/*удаление карточек*/
-function handleDeliteCard(deliteelement) {
-  deliteelement.remove();
 }
 
 /*Добавление новой карточки*/
@@ -138,7 +133,7 @@ buttonEditProfile.addEventListener("click", () =>
   handleButtonEdit(windowPopupProfile)
 );
 buttonNewCard.addEventListener("click", () =>
-  popupButtonOpen(windowPopupNewCard)
+  handleButtonOpen(windowPopupNewCard)
 );
 
 /*слушатель закрытия popup при нажатии на overlay*/
@@ -167,5 +162,3 @@ buttonPopupAddImage.addEventListener("click", () =>
 
 /*слушатель закрытия попап по нажатию на esc*/
 document.addEventListener("keydown", handleEscPopupClose);
-
-

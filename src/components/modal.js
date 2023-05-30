@@ -1,14 +1,7 @@
-
 /*функция закрытия попапов*/
 function handleButtonClose(popup) {
   popup.classList.remove("popup_opened");
 }
-
-/*функция открытия попапов*/
-function popupButtonOpen(popup) {
-  popup.classList.add("popup_opened");
-}
-
 
 /*функция закрытия попапа при нажатии на overlay*/
 function hadleOverlayClose(event) {
@@ -25,6 +18,9 @@ function handleEscPopupClose(event) {
   }
 }
 
-/*экспорт в index.js*/ 
-export { handleButtonClose, popupButtonOpen, hadleOverlayClose, handleEscPopupClose };
-
+/*экспорт в index.js*/
+export {
+  handleButtonClose,
+  hadleOverlayClose,
+  handleEscPopupClose,
+};
