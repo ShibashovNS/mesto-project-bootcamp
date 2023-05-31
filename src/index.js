@@ -1,6 +1,15 @@
 // index.js
 import "./pages/index.css"; // добавьте импорт главного файла стилей
 
+const template = document
+  .getElementById("photoCardsTeamplate")
+  .content.querySelector(".photo__card");
+
+const windowPopupAddImage = document.querySelector(".popup_addImage");
+const imagePopup = document.querySelector(".popup__photo");
+const imageCaption = document.querySelector(".popup__caption");
+export { template, windowPopupAddImage, imagePopup, imageCaption };
+
 /*элемент*/
 const buttonEditProfile = document.querySelector(".profile__editor-btn");
 const windowPopupProfile = document.querySelector(".popup_profile");
@@ -71,18 +80,14 @@ const initialCards = [
 
 /*импорты из модулей*/
 import {
-  template,
-  windowPopupAddImage,
-  imagePopup,
-  imageCaption,
   createCard,
   handlerOpenPhoto,
-  handleButtonOpen,
   handleLikeButton,
   handleDeliteCard,
 } from "../src/components/card.js";
 import {
   handleButtonClose,
+  handleButtonOpen,
   hadleOverlayClose,
   handleEscPopupClose,
 } from "../src/components/modal.js";
@@ -96,6 +101,7 @@ import {
   disableButton,
   setEventListeners,
   enableValidation,
+  handleButtonDisable,
 } from "../src/components/validation.js";
 
 /*функция открытия редактирования профиля*/
@@ -120,6 +126,7 @@ function handlePhotoCard(event) {
   photoGridList.prepend(newCard);
   popupForm.reset();
   handleButtonClose(windowPopupNewCard);
+  setEventListeners(windowNewCardForm, settings);
 }
 
 /*cоздание карточек из заданного массива*/
@@ -127,6 +134,11 @@ initialCards.forEach(function (item) {
   const newCardElement = createCard(item.link, item.name);
   photoGridList.prepend(newCardElement);
 });
+
+
+/*слушатель блокирует кнопку при сабмите*/
+popupForm.addEventListener('submit', handleButtonDisable);
+
 
 /*слушатили открытия popup*/
 buttonEditProfile.addEventListener("click", () =>

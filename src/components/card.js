@@ -1,11 +1,6 @@
 /*создание карточки*/
-const template = document
-  .getElementById("photoCardsTeamplate")
-  .content.querySelector(".photo__card");
-
-const windowPopupAddImage = document.querySelector(".popup_addImage");
-const imagePopup = document.querySelector(".popup__photo");
-const imageCaption = document.querySelector(".popup__caption");
+import { template, windowPopupAddImage, imagePopup, imageCaption } from "../../src/index.js";
+import { handleButtonOpen } from "../../src/components/modal.js"
 
 function createCard(src, text) {
   const templateClone = template.cloneNode(true);
@@ -37,10 +32,6 @@ function handlerOpenPhoto(teamplateElement, popup) {
   handleButtonOpen(popup);
 }
 
-function handleButtonOpen(popup) {
-  popup.classList.add("popup_opened");
-}
-
 /*активация лайков*/
 function handleLikeButton(event) {
   event.target.classList.toggle("photo__like-btn_active");
@@ -52,13 +43,8 @@ function handleDeliteCard(deliteelement) {
 }
 
 export {
-  template,
-  windowPopupAddImage,
-  imagePopup,
-  imageCaption,
   createCard,
   handlerOpenPhoto,
-  handleButtonOpen,
   handleLikeButton,
   handleDeliteCard,
 };

@@ -69,8 +69,12 @@ function enableValidation(settings) {
   });
 }
 
+function handleButtonDisable(event) {
+  disableButton(event.submitter);
+}
+
 /*передаем настройки переменных функции валидации, чтобы работаь с переменными как с объекстами*/
 enableValidation(validityOptions);
 
 
-export { validityOptions, showError, hideError, handleFormValidation, buttonStatus, enableButton, disableButton, setEventListeners, enableValidation };
+export { validityOptions, showError, hideError, handleFormValidation, buttonStatus, enableButton, disableButton, setEventListeners, enableValidation, handleButtonDisable };

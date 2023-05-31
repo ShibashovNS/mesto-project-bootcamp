@@ -3,6 +3,10 @@ function handleButtonClose(popup) {
   popup.classList.remove("popup_opened");
 }
 
+function handleButtonOpen(popup) {
+  popup.classList.add("popup_opened");
+}
+
 /*функция закрытия попапа при нажатии на overlay*/
 function hadleOverlayClose(event) {
   if (event.target === event.currentTarget) {
@@ -21,6 +25,7 @@ function handleEscPopupClose(event) {
 /*экспорт в index.js*/
 export {
   handleButtonClose,
+  handleButtonOpen,
   hadleOverlayClose,
   handleEscPopupClose,
 };
