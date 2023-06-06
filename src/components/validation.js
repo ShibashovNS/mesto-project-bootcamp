@@ -69,6 +69,7 @@ function enableValidation(settings) {
   });
 }
 
+/*блокирует кнопку пори сабмите формы*/
 function handleButtonDisable(event) {
   disableButton(event.submitter);
 }

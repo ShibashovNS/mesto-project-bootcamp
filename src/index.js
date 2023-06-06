@@ -17,7 +17,6 @@ const windowProfileForm = document.forms.register;
 const windowNewCardForm = document.forms.newCard;
 
 const windowPopupNewCard = document.querySelector(".popup_newCard");
-/*const windowPopupAddImage = document.querySelector(".popup_addImage"); */
 const popupForm = windowPopupNewCard.querySelector(".popup__form");
 
 /*кнопки закрытия модальных окон*/
@@ -46,6 +45,7 @@ const inputTextNewCard = windowPopupNewCard.querySelector(
 const inputSrcNewCard = windowPopupNewCard.querySelector(
   ".popup__input-item-profession"
 );
+
 const photoGridList = document.querySelector(".photo__grid-list");
 const buttonNewCard = document.querySelector(".profile__btn");
 const buttonProfileSubmit = document.querySelector(".popup__btn");
@@ -79,7 +79,9 @@ const initialCards = [
 ];
 
 /*импорты из модулей*/
-import {
+import { getCards } from "../src/components/api.js";
+import { setCard } from "../src/components/api.js";
+import { 
   createCard,
   handlerOpenPhoto,
   handleLikeButton,
@@ -122,23 +124,33 @@ function handleFormProfile(event) {
 /*Добавление новой карточки*/
 function handlePhotoCard(event) {
   event.preventDefault();
-  const newCard = createCard(inputSrcNewCard.value, inputTextNewCard.value);
-  photoGridList.prepend(newCard);
-  popupForm.reset();
-  handleButtonClose(windowPopupNewCard);
-  setEventListeners(windowNewCardForm, settings);
+  setCard(inputSrcNewCard.value, inputTextNewCard.value)
+    .then((res) => {
+      const newCard = createCard(res.link, res.name);
+      photoGridList.prepend(newCard);
+      popupForm.reset();
+      handleButtonClose(windowPopupNewCard);
+      setEventListeners(windowNewCardForm, settings);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-/*cоздание карточек из заданного массива*/
-initialCards.forEach(function (item) {
-  const newCardElement = createCard(item.link, item.name);
-  photoGridList.prepend(newCardElement);
-});
-
+/*cоздание карточек из заданных с сервера*/
+getCards()
+  .then((res) => {
+    res.forEach(function (item) {
+      const newCardElement = createCard(item.link, item.name);
+      photoGridList.append(newCardElement);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 /*слушатель блокирует кнопку при сабмите*/
-popupForm.addEventListener('submit', handleButtonDisable);
-
+popupForm.addEventListener("submit", handleButtonDisable);
 
 /*слушатили открытия popup*/
 buttonEditProfile.addEventListener("click", () =>
