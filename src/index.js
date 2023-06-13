@@ -13,8 +13,10 @@ export { template, windowPopupAddImage, imagePopup, imageCaption };
 /*элемент*/
 const buttonEditProfile = document.querySelector(".profile__editor-btn");
 const windowPopupProfile = document.querySelector(".popup_profile");
+const windowPopupAatar = document.querySelector(".popup_avatar");
 const windowProfileForm = document.forms.register;
 const windowNewCardForm = document.forms.newCard;
+const windowAvatarForm = document.forms.avatar;
 
 const windowPopupNewCard = document.querySelector(".popup_newCard");
 const popupForm = windowPopupNewCard.querySelector(".popup__form");
@@ -25,6 +27,7 @@ const buttonPopupProfileClose =
   windowPopupProfile.querySelector(".popup__closed");
 const buttonPopupNewCard = windowPopupNewCard.querySelector(".popup__closed");
 const buttonPopupAddImage = windowPopupAddImage.querySelector(".popup__closed");
+const buttonPopupAvatar = windowPopupAatar.querySelector(".popup__closed");
 
 /*перенос значений в инпут*/
 const popupContainer = document.querySelector(".popup__container");
@@ -32,6 +35,7 @@ const inputItemName = popupContainer.querySelector(".popup__input-item-name");
 const inputItemProfession = popupContainer.querySelector(
   ".popup__input-item-profession"
 );
+const inputItemAvatar = document.querySelector(".popup__input-item-avatar");
 
 /*текст с профиля*/
 const profileUserName = document.querySelector(".profile__user-name");
@@ -48,8 +52,13 @@ const inputSrcNewCard = windowPopupNewCard.querySelector(
 
 const photoGridList = document.querySelector(".photo__grid-list");
 const buttonNewCard = document.querySelector(".profile__btn");
+const buttonAvatar = document.querySelector(".profile__container-avatar");
 const buttonProfileSubmit = document.querySelector(".popup__btn");
 const containerPopupImage = document.querySelector(".popup__container_image");
+const userAvatar = document.querySelector(".profile__user-avatar");
+const photoLikes = document.querySelector(".photo__like-count");
+
+let userId;
 
 const initialCards = [
   {
@@ -81,10 +90,15 @@ const initialCards = [
 /*импорты из модулей*/
 import { getCards } from "../src/components/api.js";
 import { setCard } from "../src/components/api.js";
-import { 
+import { getUserInformation } from "../src/components/api.js";
+import { setUserInformation } from "../src/components/api.js";
+import { setUserAvatar } from "../src/components/api.js";
+import {
   createCard,
   handlerOpenPhoto,
   handleLikeButton,
+  isLiked,
+  updateLike,
   handleDeliteCard,
 } from "../src/components/card.js";
 import {
@@ -106,6 +120,12 @@ import {
   handleButtonDisable,
 } from "../src/components/validation.js";
 
+function setUserInfo(userData) {
+  profileUserInformation.textContent = userData.about;
+  profileUserName.textContent = userData.name;
+  userAvatar.src = userData.avatar;
+}
+
 /*функция открытия редактирования профиля*/
 function handleButtonEdit(popup) {
   handleButtonOpen(popup);
@@ -113,41 +133,76 @@ function handleButtonEdit(popup) {
   inputItemProfession.value = profileUserInformation.textContent;
 }
 
+/*функция отправки аватара на сервер*/
+function handleFormAvatar(event) {
+  event.preventDefault();
+  event.submitter.textContent = "Сохранение...";
+  setUserAvatar(inputItemAvatar.value)
+    .then((res) => {
+      setUserInfo(res);
+      windowAvatarForm.reset();
+      handleButtonClose(windowPopupAatar);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      event.submitter.textContent = "Сохранить";
+    });
+}
+
 /*функция попапа регистрации*/
 function handleFormProfile(event) {
   event.preventDefault();
-  profileUserName.textContent = inputItemName.value;
-  profileUserInformation.textContent = inputItemProfession.value;
-  handleButtonClose(windowPopupProfile);
+  event.submitter.textContent = "Сохранение...";
+  setUserInformation(inputItemProfession.value, inputItemName.value)
+    .then((res) => {
+      setUserInfo(res);
+      handleButtonClose(windowPopupProfile);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      event.submitter.textContent = "Сохранить";
+    });
+}
+
+/*универсальная функция создания карточки*/
+function createPhotoCard(src, text, item, userId) {
+  const newCard = createCard(src, text, item, userId);
+  return newCard;
 }
 
 /*Добавление новой карточки*/
 function handlePhotoCard(event) {
   event.preventDefault();
+  event.submitter.textContent = "Создание...";
   setCard(inputSrcNewCard.value, inputTextNewCard.value)
     .then((res) => {
-      const newCard = createCard(res.link, res.name);
+      const newCard = createPhotoCard(res.link, res.name, res, userId);
       photoGridList.prepend(newCard);
       popupForm.reset();
       handleButtonClose(windowPopupNewCard);
       setEventListeners(windowNewCardForm, settings);
+      console.log(res);
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      event.submitter.textContent = "Создать";
     });
 }
 
-/*cоздание карточек из заданных с сервера*/
-getCards()
-  .then((res) => {
-    res.forEach(function (item) {
-      const newCardElement = createCard(item.link, item.name);
-      photoGridList.append(newCardElement);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
+Promise.all([getCards(), getUserInformation()]).then(([allCards, userData]) => {
+  userId = userData._id;
+  setUserInfo(userData);
+  allCards.forEach(function (item) {
+    const newCardElement = createPhotoCard(item.link, item.name, item, userId);
+    photoGridList.append(newCardElement);
   });
+});
 
 /*слушатель блокирует кнопку при сабмите*/
 popupForm.addEventListener("submit", handleButtonDisable);
@@ -160,6 +215,10 @@ buttonNewCard.addEventListener("click", () =>
   handleButtonOpen(windowPopupNewCard)
 );
 
+buttonAvatar.addEventListener("click", () =>
+  handleButtonOpen(windowPopupAatar)
+);
+
 /*слушатель закрытия popup при нажатии на overlay*/
 overlayPopup.forEach(function (overlay) {
   overlay.addEventListener("mousedown", (event) => {
@@ -170,18 +229,20 @@ overlayPopup.forEach(function (overlay) {
 /*сабмит формы редактирования профиля и добавления карточек*/
 windowPopupNewCard.addEventListener("submit", handlePhotoCard);
 windowProfileForm.addEventListener("submit", handleFormProfile);
+windowAvatarForm.addEventListener("submit", handleFormAvatar);
 
 /*закртытие карточек*/
 buttonPopupProfileClose.addEventListener("click", () =>
   handleButtonClose(windowPopupProfile)
 );
-
 buttonPopupNewCard.addEventListener("click", () =>
   handleButtonClose(windowPopupNewCard)
 );
-
 buttonPopupAddImage.addEventListener("click", () =>
   handleButtonClose(windowPopupAddImage)
+);
+buttonPopupAvatar.addEventListener("click", () =>
+  handleButtonClose(windowPopupAatar)
 );
 
 /*слушатель закрытия попап по нажатию на esc*/

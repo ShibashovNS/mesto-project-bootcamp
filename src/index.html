@@ -14,13 +14,15 @@
   <main class="content">
     <section class="profile"> 
       <div class="profile__info">
-        <img class="profile__user-avatar" src="<%=require('./images/image-min.jpg')%>" alt="автарка">
+        <div class="profile__container-avatar">
+          <img class="profile__user-avatar" src="#" alt="автарка">
+        </div>
         <div class="profile__text">
           <div class="profile__text-container">
-            <h1 class="profile__user-name" contenteditable>Жак-Ив Кусто</h1>
+            <h1 class="profile__user-name" contenteditable></h1>
             <button type="button" class="profile__editor-btn"></button>
           </div>
-            <p class="profile__user-information" contenteditable>Исследователь океана</p>
+            <p class="profile__user-information" contenteditable></p>
         </div>
       </div>
       <button type="button" class="profile__btn"></button>
@@ -33,6 +35,7 @@
     <footer class="footer">
       <p class="footer__text">© 2023 Mesto Russia</p>
     </footer>
+
     <div class="popup popup_profile">
       <div class="popup__container">
         <h2 class="popup__text">Редактировать профиль</h2>
@@ -48,6 +51,21 @@
         </form>
       </div>
     </div>
+
+    <div class="popup popup_avatar">
+      <div class="popup__container">
+        <h2 class="popup__text">Обновить аватар</h2>
+         <div class="popup__input-container">
+          <form class="popup__form" name="avatar" novalidate>
+           <input class="popup__input-item popup__input-item-avatar" id="imagelink"  type="url" placeholder="Ссылка на картинку" required>
+            <span class="popup__error-messange" id="error-imagelink" name=""></span>
+              <button type="submit" class="popup__btn">Сохранить</button>                 
+          </div>
+          <button type="button" class="popup__closed"></button>
+        </form>
+      </div>
+    </div>
+
     <div class="popup popup_newCard">
       <div class="popup__container">
         <h2 class="popup__text">Новое место</h2>
@@ -57,7 +75,7 @@
             <span class="popup__error-messange" id="error-cardname" name=""></span>  
             <input class="popup__input-item popup__input-item-profession" id="imagelink"  type="url" placeholder="Ссылка на картинку" required>
             <span class="popup__error-messange" id="error-imagelink" name=""></span>
-              <button type="submit" class="popup__btn">Сохранить</button>                 
+              <button type="submit" class="popup__btn">Создать</button>                 
           </div>
           <button type="button" class="popup__closed"></button>
         </form>
@@ -76,7 +94,10 @@
       <button class="photo__delite"></button>
       <div class="photo__text-container">
         <h2 class="photo__text">Карачаевск</h2>
-        <button type="button" class="photo__like-btn" ></button>
+        <div class="photo__like-container">
+          <button type="button" class="photo__like-btn" ></button>
+          <span class="photo__like-count"></span>
+        </div>
       </div>
     </li>
   </template>

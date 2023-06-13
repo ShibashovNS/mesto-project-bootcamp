@@ -6,6 +6,7 @@
   height: 19px;
   border: none;
   background: url(../../../images/delite_icon.svg);
+  display: block;
 }
 
 .photo__delite:hover {
