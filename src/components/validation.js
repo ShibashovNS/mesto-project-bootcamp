@@ -78,4 +78,4 @@ function handleButtonDisable(event) {
 enableValidation(validityOptions);
 
 
-export { validityOptions, showError, hideError, handleFormValidation, buttonStatus, enableButton, disableButton, setEventListeners, enableValidation, handleButtonDisable };
+export { handleButtonDisable };
