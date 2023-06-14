@@ -25,12 +25,6 @@ function handleEscPopupClose(event) {
     handleButtonClose(popup);
   }
 }
-/*слушатель закрытия popup при нажатии на overlay*/
-overlayPopup.forEach(function (overlay) {
-  overlay.addEventListener("mousedown", (event) => {
-    hadleOverlayClose(event);
-  });
-});
 
 const popups = document.querySelectorAll('.popup');
 popups.forEach((popup) => {

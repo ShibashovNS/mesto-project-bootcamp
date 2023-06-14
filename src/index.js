@@ -37,16 +37,12 @@ import { setCard } from "../src/components/api.js";
 import { getUserInformation } from "../src/components/api.js";
 import { setUserInformation } from "../src/components/api.js";
 import { setUserAvatar } from "../src/components/api.js";
-import {
-  createCard
-} from "../src/components/card.js";
+import { createCard } from "../src/components/card.js";
 import {
   handleButtonClose,
   handleButtonOpen,
 } from "../src/components/modal.js";
-import {
-  handleButtonDisable,
-} from "../src/components/validation.js";
+import { handleButtonDisable } from "../src/components/validation.js";
 
 function setUserInfo(userData) {
   profileUserInformation.textContent = userData.about;
@@ -124,10 +120,19 @@ function handlePhotoCard(event) {
 Promise.all([getCards(), getUserInformation()]).then(([allCards, userData]) => {
   userId = userData._id;
   setUserInfo(userData);
-  allCards.forEach(function (item) {
-    const newCardElement = createPhotoCard(item.link, item.name, item, userId);
-    photoGridList.append(newCardElement);
-  });
+  allCards
+    .forEach(function (item) {
+      const newCardElement = createPhotoCard(
+        item.link,
+        item.name,
+        item,
+        userId
+      );
+      photoGridList.append(newCardElement);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 /*слушатель блокирует кнопку при сабмите*/
