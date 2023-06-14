@@ -1,4 +1,4 @@
-const overlayPopup = document.querySelectorAll(".popup");
+const popups = document.querySelectorAll('.popup');
 
 /*функция закрытия попапов*/
 function handleButtonClose(popup) {
@@ -26,7 +26,6 @@ function handleEscPopupClose(event) {
   }
 }
 
-const popups = document.querySelectorAll('.popup');
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
