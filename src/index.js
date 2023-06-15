@@ -117,11 +117,11 @@ function handlePhotoCard(event) {
     });
 }
 
-Promise.all([getCards(), getUserInformation()]).then(([allCards, userData]) => {
-  userId = userData._id;
-  setUserInfo(userData);
-  allCards
-    .forEach(function (item) {
+Promise.all([getCards(), getUserInformation()])
+  .then(([allCards, userData]) => {
+    userId = userData._id;
+    setUserInfo(userData);
+    allCards.forEach(function (item) {
       const newCardElement = createPhotoCard(
         item.link,
         item.name,
@@ -129,11 +129,11 @@ Promise.all([getCards(), getUserInformation()]).then(([allCards, userData]) => {
         userId
       );
       photoGridList.append(newCardElement);
-    })
-    .catch((err) => {
-      console.log(err);
     });
-});
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 /*слушатель блокирует кнопку при сабмите*/
 popupForm.addEventListener("submit", handleButtonDisable);

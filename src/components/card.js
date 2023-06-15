@@ -17,17 +17,28 @@ function createCard(src, text, item, userId) {
   const buttonDeliteCard = templateClone.querySelector(".photo__delite");
   const buttonLike = templateClone.querySelector(".photo__like-btn");
   const photoLikeCouter = templateClone.querySelector(".photo__like-count");
-  const cardlikes = item.likes;
-
   templatePhotoImage.src = src;
   templateText.textContent = text;
   templatePhotoImage.alt = text;
+
+  /*активация лайков*/
+  function handleLikeButton(evt, item, userId, buttonLike, photoLikeCouter) {
+  const queryMethod = isLiked(item.likes, userId)
+    ? deliteLike(item._id)
+    : setLike(item._id);
+  queryMethod
+    .then((res) => {
+      item.likes = res.likes;
+      updateLike(res.likes, userId, buttonLike, photoLikeCouter);
+    })
+    .catch((err) => console.log(err));
+}
 
   templatePhotoImage.addEventListener("click", () =>
     handlerOpenPhoto(templateClone, windowPopupAddImage)
   );
 
-  updateLike(item.likes, userId, cardlikes, buttonLike, photoLikeCouter);
+  updateLike(item.likes, userId, buttonLike, photoLikeCouter);
 
   if (item.owner._id !== userId) {
     buttonDeliteCard.remove();
@@ -57,35 +68,14 @@ function handleLikeButton(buttonLike) {
   buttonLike.classList.toggle("photo__like-btn_active");
 }*/
 
-/*активация лайков*/
-function handleLikeButton(evt, item, userId, buttonLike, photoLikeCouter) {
-  const cardlikes = item.likes;
-  const queryMethod = buttonLike.classList.contains("photo__like-btn_active")
-    ? deliteLike(item._id)
-    : setLike(item._id);
-  queryMethod
-    .then((res) => {
-      updateLike(res.likes, userId, cardlikes, buttonLike, photoLikeCouter);
-    })
-    .catch((err) => console.log(err));
-}
 
 /*функция с лайкамии*/
 function isLiked(likesArray, userId) {
   return likesArray.some((item) => item._id === userId);
 }
 
-function updateLike(
-  likesArray,
-  userId,
-  cardlikes,
-  buttonLike,
-  photoLikeCouter
-) {
-  buttonLike.classList.toggle(
-    "photo__like-btn_active",
-    isLiked(likesArray, userId)
-  );
+function updateLike(likesArray, userId, buttonLike, photoLikeCouter
+) { buttonLike.classList.toggle("photo__like-btn_active", isLiked(likesArray, userId));
   photoLikeCouter.textContent = likesArray.length;
 }
 
