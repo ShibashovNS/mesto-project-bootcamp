@@ -50,6 +50,12 @@ function setUserInfo(userData) {
   userAvatar.src = userData.avatar;
 }
 
+/*универсальная функция создания карточки*/
+function createPhotoCard(src, text, item, userId) {
+  const newCard = createCard(src, text, item, userId);
+  return newCard;
+}
+
 /*функция открытия редактирования профиля*/
 function handleButtonEdit(popup) {
   handleButtonOpen(popup);
@@ -57,7 +63,67 @@ function handleButtonEdit(popup) {
   inputItemProfession.value = profileUserInformation.textContent;
 }
 
-/*функция отправки аватара на сервер*/
+function renderLoading(
+  isLoding,
+  button,
+  buttonText = "Сохранить",
+  lodingText = "Сохранение..."
+) {
+  if (isLoding) {
+    button.textContent = lodingText;
+  } else {
+    button.textContent = buttonText;
+  }
+}
+
+function handleSubmit(request, event, loadingText = "Сохранение...") {
+  event.preventDefault();
+  const submitButton = event.submitter;
+  const initialText = submitButton.textContent;
+  // изменяем текст кнопки до вызова запроса
+  renderLoading(true, submitButton, initialText, loadingText);
+  request()
+    .then(() => {
+      // очистка формы после успешного ответа от сервера
+      event.target.reset();
+    })
+    .catch((err) => {
+      console.error(`Ошибка: ${err}`);
+    })
+   // возвращаем тексткнопки обратно начальный текст кнопки
+   .finally(() => {
+    renderLoading(false, submitButton, initialText);
+  });
+}
+
+/*функция попапа регистрации
+function handleFormProfile(event) {
+  event.preventDefault();
+  event.submitter.textContent = "Сохранение...";
+  setUserInformation(inputItemProfession.value, inputItemName.value)
+    .then((res) => {
+      setUserInfo(res);
+      handleButtonClose(windowPopupProfile);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      event.submitter.textContent = "Сохранить";
+    });
+} */
+function handleFormProfile(event) {
+  function makeRequest() {
+    return setUserInformation(inputItemProfession.value, inputItemName.value)
+      .then((res) => {
+        setUserInfo(res);
+        handleButtonClose(windowPopupProfile);
+      });
+  }
+  handleSubmit(makeRequest, event);
+}
+
+/*функция отправки аватара на сервер
 function handleFormAvatar(event) {
   event.preventDefault();
   event.submitter.textContent = "Сохранение...";
@@ -73,32 +139,19 @@ function handleFormAvatar(event) {
     .finally(() => {
       event.submitter.textContent = "Сохранить";
     });
-}
-
-/*функция попапа регистрации*/
-function handleFormProfile(event) {
-  event.preventDefault();
-  event.submitter.textContent = "Сохранение...";
-  setUserInformation(inputItemProfession.value, inputItemName.value)
+}*/
+function handleFormAvatar(event) {
+  function makeRequest() {
+    return setUserAvatar(inputItemAvatar.value)
     .then((res) => {
       setUserInfo(res);
-      handleButtonClose(windowPopupProfile);
+      handleButtonClose(windowPopupAatar);
     })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      event.submitter.textContent = "Сохранить";
-    });
+  }
+  handleSubmit(makeRequest, event);
 }
 
-/*универсальная функция создания карточки*/
-function createPhotoCard(src, text, item, userId) {
-  const newCard = createCard(src, text, item, userId);
-  return newCard;
-}
-
-/*Добавление новой карточки*/
+/*Добавление новой карточки
 function handlePhotoCard(event) {
   event.preventDefault();
   event.submitter.textContent = "Создание...";
@@ -115,6 +168,18 @@ function handlePhotoCard(event) {
     .finally(() => {
       event.submitter.textContent = "Создать";
     });
+}*/
+function handlePhotoCard(event) {
+  function makeRequest() {
+    return setCard(inputSrcNewCard.value, inputTextNewCard.value)
+    .then((res) => {
+      const newCard = createPhotoCard(res.link, res.name, res, userId);
+      photoGridList.prepend(newCard);
+      popupForm.reset();
+      handleButtonClose(windowPopupNewCard);
+    })
+  }
+  handleSubmit(makeRequest, event, "Создание...");
 }
 
 Promise.all([getCards(), getUserInformation()])
